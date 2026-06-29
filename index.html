@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A&L Pure Water — Mountain View's Neighborhood Water Store</title>
+  <meta name="description" content="Purified RO and alkaline water refills, bottles, supplies, and delivery in Mountain View, CA. Open Mon–Sat with a 24/7 outdoor kiosk.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-bg:        #F7F6F2;
+      --color-surface:   #EEEBE3;
+      --color-ink:       #1A1A18;
+      --color-ink-muted: #6B6860;
+      --color-accent:    #2D6A8F;
+      --color-accent-lt: #E8F1F7;
+      --color-rule:      #D4D0C8;
+
+      --text-xs:   0.75rem;
+      --text-sm:   0.875rem;
+      --text-base: 1rem;
+      --text-lg:   1.125rem;
+      --text-xl:   1.375rem;
+      --text-2xl:  2rem;
+      --text-hero: clamp(3rem, 8vw, 6rem);
+
+      --font-display: 'DM Serif Display', serif;
+      --font-body:    'Inter', sans-serif;
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: var(--text-base);
+      color: var(--color-ink);
+      background: var(--color-bg);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Nav ── */
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--color-bg);
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s ease;
+    }
+
+    .nav.scrolled {
+      border-bottom-color: var(--color-rule);
+    }
+
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      color: var(--color-ink);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: var(--text-sm);
+      color: var(--color-ink-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--color-ink);
+    }
+
+    .nav-hamburger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      width: 24px;
+      height: 24px;
+      position: relative;
+    }
+
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--color-ink);
+      position: absolute;
+      left: 0;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+
+    .nav-hamburger span:nth-child(1) { top: 5px; }
+    .nav-hamburger span:nth-child(2) { top: 11px; }
+    .nav-hamburger span:nth-child(3) { top: 17px; }
+
+    .nav-hamburger.open span:nth-child(1) {
+      transform: translateY(6px) rotate(45deg);
+    }
+    .nav-hamburger.open span:nth-child(2) {
+      opacity: 0;
+    }
+    .nav-hamburger.open span:nth-child(3) {
+      transform: translateY(-6px) rotate(-45deg);
+    }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 99;
+      background: var(--color-bg);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2.5rem;
+    }
+
+    .mobile-menu.open {
+      display: flex;
+    }
+
+    .mobile-menu a {
+      font-size: var(--text-xl);
+      color: var(--color-ink);
+      text-decoration: none;
+    }
+
+    /* ── Hero ── */
+
+    .hero {
+      min-height: 100svh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 3rem;
+      padding: 6rem 2rem 4rem;
+      max-width: 72rem;
+      margin: 0 auto;
+    }
+
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .hero-image {
+      width: 100%;
+      height: 32rem;
+      object-fit: cover;
+      border-radius: 2px;
+    }
+
+    .hero-headline {
+      font-family: var(--font-display);
+      font-size: var(--text-hero);
+      line-height: 1.05;
+      color: var(--color-ink);
+      margin-bottom: 2rem;
+      animation: fadeIn 0.8s ease both;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-headline {
+        animation: none;
+      }
+    }
+
+    .hero-rule {
+      width: 4rem;
+      height: 1px;
+      background: var(--color-rule);
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-tagline {
+      font-size: var(--text-sm);
+      color: var(--color-ink-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      font-weight: 500;
+      color: #fff;
+      background: var(--color-accent);
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 2px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .btn:hover {
+      opacity: 0.85;
+    }
+
+    .hero-phone {
+      font-size: var(--text-base);
+      font-weight: 500;
+      color: var(--color-accent);
+      text-decoration: none;
+    }
+
+    /* ── Section shared ── */
+
+    .section {
+      padding: 5rem 2rem;
+      max-width: 72rem;
+      margin: 0 auto;
+    }
+
+    .section-eyebrow {
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-rule {
+      width: 100%;
+      height: 1px;
+      background: var(--color-rule);
+      margin-bottom: 3rem;
+    }
+
+    /* ── What We Offer ── */
+
+    .offer-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .offer-card {
+      background: var(--color-surface);
+      padding: 2rem;
+      border-radius: 2px;
+    }
+
+    .offer-card-eyebrow {
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--color-accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .offer-card h3 {
+      font-family: var(--font-body);
+      font-size: var(--text-xl);
+      font-weight: 500;
+      margin-bottom: 0.75rem;
+    }
+
+    .offer-card p {
+      font-size: var(--text-base);
+      color: var(--color-ink-muted);
+      line-height: 1.6;
+    }
+
+    /* ── Pricing ── */
+
+    .pricing-section {
+      background: var(--color-accent-lt);
+      padding: 5rem 2rem;
+    }
+
+    .pricing-inner {
+      max-width: 72rem;
+      margin: 0 auto;
+    }
+
+    .pricing-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .pricing-card {
+      background: #fff;
+      padding: 2.5rem;
+      border-radius: 2px;
+    }
+
+    .pricing-card h3 {
+      font-family: var(--font-body);
+      font-size: var(--text-xl);
+      font-weight: 500;
+      margin-bottom: 2rem;
+    }
+
+    .pricing-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 0.75rem 0;
+    }
+
+    .pricing-row + .pricing-row {
+      border-top: 1px solid var(--color-rule);
+    }
+
+    .pricing-label {
+      font-size: var(--text-base);
+      color: var(--color-ink-muted);
+    }
+
+    .pricing-value {
+      font-size: var(--text-2xl);
+      font-weight: 500;
+      font-variant-numeric: tabular-nums;
+      color: var(--color-ink);
+    }
+
+    .membership-badge {
+      display: inline-block;
+      font-size: var(--text-xs);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      background: var(--color-accent);
+      color: #fff;
+      padding: 0.25rem 0.6rem;
+      border-radius: 2px;
+      margin-bottom: 1.5rem;
+    }
+
+    .membership-detail {
+      font-size: var(--text-base);
+      color: var(--color-ink-muted);
+      margin-top: 0.25rem;
+    }
+
+    .pricing-disclaimer {
+      font-size: var(--text-xs);
+      color: var(--color-ink-muted);
+      margin-top: 2rem;
+    }
+
+    /* ── How It Works ── */
+
+    .how-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0;
+    }
+
+    .how-option {
+      padding: 0 2rem;
+    }
+
+    .how-option:not(:last-child) {
+      border-right: 1px solid var(--color-rule);
+    }
+
+    .how-option-eyebrow {
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--color-accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .how-option h3 {
+      font-family: var(--font-body);
+      font-size: var(--text-xl);
+      font-weight: 500;
+      margin-bottom: 0.25rem;
+    }
+
+    .how-option-sub {
+      font-size: var(--text-sm);
+      color: var(--color-ink-muted);
+      margin-bottom: 1rem;
+    }
+
+    .how-option-rule {
+      width: 2rem;
+      height: 1px;
+      background: var(--color-rule);
+      margin-bottom: 1rem;
+    }
+
+    .how-option p:last-child {
+      font-size: var(--text-base);
+      color: var(--color-ink-muted);
+      line-height: 1.6;
+    }
+
+    /* ── Hours & Location ── */
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+
+    .hours-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .hours-table td {
+      padding: 0.5rem 0;
+      font-size: var(--text-base);
+    }
+
+    .hours-table td:first-child {
+      color: var(--color-ink-muted);
+      padding-right: 2rem;
+    }
+
+    .hours-closed {
+      color: var(--color-ink-muted);
+      font-style: italic;
+    }
+
+    .location h3,
+    .hours h3 {
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      margin-bottom: 1.5rem;
+    }
+
+    .location-address {
+      font-size: var(--text-base);
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+
+    .location-link {
+      display: inline-block;
+      font-size: var(--text-sm);
+      font-weight: 500;
+      color: var(--color-accent);
+      text-decoration: none;
+    }
+
+    .location-link:hover {
+      text-decoration: underline;
+    }
+
+    .map-embed {
+      margin-top: 3rem;
+      max-width: 72rem;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 0 2rem;
+    }
+
+    .map-embed iframe {
+      width: 100%;
+      height: 300px;
+      border: none;
+      border-radius: 2px;
+    }
+
+    /* ── Footer ── */
+
+    footer {
+      border-top: 1px solid var(--color-rule);
+      padding: 2rem;
+      text-align: center;
+      font-size: var(--text-sm);
+      color: var(--color-ink-muted);
+    }
+
+    footer span {
+      margin: 0 0.25rem;
+    }
+
+    /* ── Photo ── */
+
+    .kiosk-feature {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+      max-width: 72rem;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+
+    .kiosk-feature img {
+      width: 100%;
+      height: 22rem;
+      object-fit: cover;
+      border-radius: 2px;
+      display: block;
+    }
+
+    .kiosk-feature-text h3 {
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      margin-bottom: 1rem;
+    }
+
+    .kiosk-feature-text p {
+      font-size: var(--text-base);
+      color: var(--color-ink-muted);
+      line-height: 1.7;
+      margin-bottom: 0.75rem;
+    }
+
+    .kiosk-feature-text .eyebrow {
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--color-accent);
+      margin-bottom: 0.5rem;
+    }
+
+    /* ── Responsive ── */
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .nav-hamburger {
+        display: block;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        padding: 5rem 1.5rem 3rem;
+        min-height: auto;
+      }
+
+      .hero-image {
+        height: 20rem;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+
+      .section {
+        padding: 3.5rem 1.5rem;
+      }
+
+      .offer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .pricing-section {
+        padding: 3.5rem 1.5rem;
+      }
+
+      .pricing-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .how-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
+      .how-option {
+        padding: 0;
+      }
+
+      .how-option:not(:last-child) {
+        border-right: none;
+        padding-bottom: 2.5rem;
+        border-bottom: 1px solid var(--color-rule);
+      }
+
+      .info-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+
+      .map-embed {
+        padding: 0 1.5rem;
+      }
+
+      .kiosk-feature {
+        grid-template-columns: 1fr;
+        padding: 3rem 1.5rem;
+        gap: 1.5rem;
+      }
+
+      .kiosk-feature img {
+        height: 16rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Nav ── -->
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <a href="#" class="nav-logo">A&L Pure Water</a>
+    <ul class="nav-links">
+      <li><a href="#water">Water</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#hours">Hours</a></li>
+      <li><a href="#location">Find Us</a></li>
+    </ul>
+    <button class="nav-hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+
+  <div class="mobile-menu" role="dialog" aria-label="Mobile navigation">
+    <a href="#water">Water</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#hours">Hours</a>
+    <a href="#location">Find Us</a>
+  </div>
+
+  <main>
+
+    <!-- ── Hero ── -->
+    <section class="hero" aria-label="Introduction">
+      <div class="hero-content">
+        <h1 class="hero-headline">Clean water.<br>Mountain View's<br>neighborhood source.</h1>
+        <div class="hero-rule"></div>
+        <p class="hero-tagline">Purified RO · Alkaline · Delivery · Kiosk 24/7</p>
+        <div class="hero-actions">
+          <a href="#location" class="btn">Find our location</a>
+          <a href="tel:+16509383122" class="hero-phone">(650) 938-3122</a>
+        </div>
+      </div>
+      <img class="hero-image" src="images/store-2.jpg" alt="A&L Pure Water storefront on Grant Road in Mountain View">
+    </section>
+
+    <!-- ── What We Offer ── -->
+    <section class="section" id="water" aria-label="What we offer">
+      <h2 class="section-eyebrow">What we offer</h2>
+      <div class="section-rule"></div>
+      <div class="offer-grid">
+        <div class="offer-card">
+          <p class="offer-card-eyebrow">Refill</p>
+          <h3>Purified RO Water</h3>
+          <p>Reverse osmosis filtered for a clean, neutral taste. Bring your own jugs or buy one in-store.</p>
+        </div>
+        <div class="offer-card">
+          <p class="offer-card-eyebrow">Refill</p>
+          <h3>Alkaline Water</h3>
+          <p>pH 8–10, minerals added. Clean, crisp, and deeply hydrating.</p>
+        </div>
+        <div class="offer-card">
+          <p class="offer-card-eyebrow">Shop</p>
+          <h3>Bottles &amp; Supplies</h3>
+          <p>Wide selection of water bottles and purification systems.</p>
+        </div>
+        <div class="offer-card">
+          <!-- [PLACEHOLDER] Delivery details — confirm radius, minimum order, signup process with owners -->
+          <p class="offer-card-eyebrow">Service</p>
+          <h3>Water Delivery</h3>
+          <p>Within 10 miles of Mountain View. Call to set up service.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Pricing ── -->
+    <!-- [PLACEHOLDER] All prices — confirm current pricing and membership tiers with Ally -->
+    <section class="pricing-section" id="pricing" aria-label="Pricing">
+      <div class="pricing-inner">
+        <h2 class="section-eyebrow">Pricing</h2>
+        <div class="section-rule"></div>
+        <div class="pricing-cards">
+          <div class="pricing-card">
+            <h3>Per Gallon</h3>
+            <div class="pricing-row">
+              <span class="pricing-label">RO Purified</span>
+              <span class="pricing-value">$0.75</span>
+            </div>
+            <div class="pricing-row">
+              <span class="pricing-label">Alkaline</span>
+              <span class="pricing-value">$1.50</span>
+            </div>
+          </div>
+          <div class="pricing-card">
+            <h3>Membership</h3>
+            <!-- [PLACEHOLDER] Membership tiers — may have more options, confirm with owners -->
+            <span class="membership-badge">Member Price</span>
+            <div class="pricing-row">
+              <span class="pricing-label">100 gal</span>
+              <span class="pricing-value">$70</span>
+            </div>
+            <p class="membership-detail">(RO Purified)</p>
+          </div>
+        </div>
+        <p class="pricing-disclaimer">Prices may vary. Call or visit to confirm.</p>
+      </div>
+    </section>
+
+    <!-- ── How It Works ── -->
+    <section class="section" id="how" aria-label="How to get water">
+      <h2 class="section-eyebrow">How to get water</h2>
+      <div class="section-rule"></div>
+      <div class="how-grid">
+        <div class="how-option">
+          <p class="how-option-eyebrow">In-Store</p>
+          <h3>Mon – Sat</h3>
+          <div class="how-option-rule"></div>
+          <p>Browse, fill, and pick up supplies.</p>
+        </div>
+        <div class="how-option">
+          <p class="how-option-eyebrow">Outdoor Kiosk</p>
+          <h3>Open 24 / 7</h3>
+          <div class="how-option-rule"></div>
+          <p>Accepts bills and credit cards. Bring your jugs.</p>
+        </div>
+        <div class="how-option">
+          <!-- [PLACEHOLDER] Delivery details — confirm with owners -->
+          <p class="how-option-eyebrow">Delivery</p>
+          <h3>Within 10 mi</h3>
+          <div class="how-option-rule"></div>
+          <p>Call to set up.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Kiosk Feature ── -->
+    <div class="kiosk-feature">
+      <img src="images/store-3.jpg" alt="A&L Pure Water 24/7 outdoor water refill kiosks with UV purification" loading="lazy">
+      <div class="kiosk-feature-text">
+        <p class="eyebrow">24/7 Kiosk</p>
+        <h3>Fill up anytime</h3>
+        <p>Our outdoor kiosks are available around the clock. Just bring your jugs, insert bills or tap your card, and fill up.</p>
+        <p>RO purified water dispensed fresh, with UV sanitation between every use.</p>
+      </div>
+    </div>
+
+    <!-- ── Hours & Location ── -->
+    <section class="section" id="hours" aria-label="Hours and location">
+      <div class="info-grid">
+        <div class="hours">
+          <h3>Hours</h3>
+          <table class="hours-table">
+            <tr><td>Mon – Fri</td><td>10am – 6pm</td></tr>
+            <tr><td>Saturday</td><td>10am – 5pm</td></tr>
+            <tr><td>Sunday</td><td><span class="hours-closed">Closed</span></td></tr>
+          </table>
+        </div>
+        <div class="location" id="location">
+          <h3>Find Us</h3>
+          <p class="location-address">
+            1040 Grant Rd<br>
+            Suite 187<br>
+            Mountain View, CA<br>
+            94040
+          </p>
+          <a href="https://www.google.com/maps/dir/?api=1&destination=1040+Grant+Rd+Suite+187+Mountain+View+CA+94040" target="_blank" rel="noopener noreferrer" class="location-link">Get directions ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="map-embed">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3169.123!2d-122.085!3d37.387!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fb737af28db13%3A0x39a3c4e6c02e6dcd!2s1040%20Grant%20Rd%20%23187%2C%20Mountain%20View%2C%20CA%2094040!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="A&L Pure Water location on Google Maps"></iframe>
+    </div>
+
+  </main>
+
+  <!-- ── Footer ── -->
+  <footer>
+    <!-- [PLACEHOLDER] Logo/wordmark — check if owners have one; using text logotype for now -->
+    A&L Pure Water <span>·</span> 1040 Grant Rd Suite 187, Mountain View <span>·</span> <a href="tel:+16509383122" style="color: var(--color-ink-muted); text-decoration: none;">(650) 938-3122</a> <span>·</span> © 2025
+  </footer>
+
+  <script>
+    // Nav border on scroll
+    const nav = document.querySelector('.nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 10);
+    }, { passive: true });
+
+    // Mobile menu toggle
+    const hamburger = document.querySelector('.nav-hamburger');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    hamburger.addEventListener('click', () => {
+      const open = hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open', open);
+      hamburger.setAttribute('aria-expanded', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+
+    // Close mobile menu on link click
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      });
+    });
+  </script>
+
+</body>
+</html>
