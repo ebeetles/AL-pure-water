@@ -378,6 +378,48 @@
       margin-top: 2rem;
     }
 
+    /* ── Reviews ── */
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .review-card {
+      background: var(--color-surface);
+      padding: 2rem;
+      border-radius: 2px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .review-stars {
+      color: var(--color-accent);
+      font-size: var(--text-sm);
+      letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+    }
+
+    .review-text {
+      font-size: var(--text-base);
+      color: var(--color-ink);
+      line-height: 1.7;
+      flex: 1;
+      margin-bottom: 1.25rem;
+    }
+
+    .review-author {
+      font-size: var(--text-sm);
+      color: var(--color-ink-muted);
+    }
+
+    .review-source {
+      font-size: var(--text-xs);
+      color: var(--color-ink-muted);
+      margin-top: 0.125rem;
+    }
+
     /* ── How It Works ── */
 
     .how-grid {
@@ -594,6 +636,10 @@
         grid-template-columns: 1fr;
       }
 
+      .reviews-grid {
+        grid-template-columns: 1fr;
+      }
+
       .how-grid {
         grid-template-columns: 1fr;
         gap: 2.5rem;
@@ -730,6 +776,32 @@
           </div>
         </div>
         <p class="pricing-disclaimer">Prices may vary. Call or visit to confirm.</p>
+      </div>
+    </section>
+
+    <!-- ── Reviews ── -->
+    <section class="section" aria-label="Customer reviews">
+      <h2 class="section-eyebrow">What neighbors say</h2>
+      <div class="section-rule"></div>
+      <div class="reviews-grid">
+        <div class="review-card">
+          <div class="review-stars">★ ★ ★ ★ ★</div>
+          <p class="review-text">"Absolutely love our water delivery service and also getting water in store and at the 24/7 store kiosks. So many convenient options."</p>
+          <p class="review-author">Tina H.</p>
+          <p class="review-source">Google Review</p>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★ ★ ★ ★ ★</div>
+          <p class="review-text">"I am a client for the last 10 years, very happy. New owners are very friendly."</p>
+          <p class="review-author">Thierry F.</p>
+          <p class="review-source">Google Review</p>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★ ★ ★ ★ ★</div>
+          <p class="review-text">"Ally and Lawrence are very helpful and their Alkaline Water is the greatest. Awesome owners and obviously all types of great water."</p>
+          <p class="review-author">Mary-Joan S.</p>
+          <p class="review-source">Google Review</p>
+        </div>
       </div>
     </section>
 
